@@ -3,6 +3,7 @@
  */
 
 // Modules
-export { FsPhoneModule } from './app/fs-phone.module';
+export { FsMaskModule } from './app/mask.module';
+
 
 

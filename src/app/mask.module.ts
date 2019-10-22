@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Components
-import { FsPhoneDirective } from './directives/phone.directive';
+import { FsMaskDirective } from './directives/mask.directive';
 
 
 @NgModule({
@@ -10,16 +10,16 @@ import { FsPhoneDirective } from './directives/phone.directive';
     CommonModule
   ],
   exports: [
-    FsPhoneDirective,
+    FsMaskDirective,
   ],
   declarations: [
-    FsPhoneDirective,
+    FsMaskDirective,
   ],
 })
-export class FsPhoneModule {
+export class FsMaskModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: FsPhoneModule
+      ngModule: FsMaskModule
     };
   }
 }

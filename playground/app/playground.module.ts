@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FsPhoneModule } from '@firestitch/phone';
+import { FsMaskModule } from '../../src/app/mask.module';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
@@ -19,7 +19,7 @@ import { FirstExampleComponent } from './components/first-example/first-example.
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
-    FsPhoneModule.forRoot(),
+    FsMaskModule.forRoot(),
     BrowserAnimationsModule,
     FsMaterialModule,
     FormsModule,
