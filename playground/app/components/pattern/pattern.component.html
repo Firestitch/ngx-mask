@@ -1,0 +1,15 @@
+<form fsForm="save(form)">
+  <mat-form-field>
+    <input
+      matInput
+      [(ngModel)]="pattern"
+      fsFormRequired
+      fsMask
+      name="pattern"
+      mask="+{7} 000 000 000-00"
+      placeholder="Value"
+      (ngModelChange)="changed($event)">
+    <mat-hint>Value: {{pattern}}</mat-hint>
+  </mat-form-field>
+</form>
+

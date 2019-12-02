@@ -26,10 +26,10 @@ export class FsMaskDirective implements OnInit {
   @Input() format: 'currency';
   @Input() mask: RegExp | Function | String | Number | Date;
   @Input() padFractionalZeros;
-  @Input() thousandsSeparator;
-  @Input() radix;
+  @Input() thousandsSeparator = ',';
+  @Input() radix = '.';
   @Input() scale;
-  @Input() signed;
+  @Input() signed = true;
   @Input() min;
   @Input() max;
   @Input() startsWith;
@@ -54,8 +54,6 @@ export class FsMaskDirective implements OnInit {
 
     if (this.format === 'currency') {
       this.mask = Number;
-      this.radix = '.';
-      this.thousandsSeparator = ',';
       this.scale = 2;
       this.signed = false;
       this.padFractionalZeros = true;

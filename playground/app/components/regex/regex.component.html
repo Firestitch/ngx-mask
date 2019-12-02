@@ -1,0 +1,15 @@
+<form fsForm="save(form)">
+  <mat-form-field>
+    <input
+      matInput
+      [(ngModel)]="regex"
+      fsFormRequired
+      fsMaskRegExp
+      name="regex"
+      mask="/^\d+$/"
+      placeholder="Value"
+      (ngModelChange)="changed($event)">
+    <mat-hint>Value: {{regex}}</mat-hint>
+  </mat-form-field>
+</form>
+

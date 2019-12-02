@@ -1,0 +1,17 @@
+<form fsForm="save(form)">
+  <mat-form-field>
+    <input
+      matInput
+      [(ngModel)]="number"
+      fsFormRequired
+      fsMaskNumber
+      scale="5"
+      name="number"
+      [signed]="true"
+      [padFractionalZeros]="true"
+      placeholder="Number"
+      (ngModelChange)="changed($event)">
+    <mat-hint>Value: {{number}}</mat-hint>
+  </mat-form-field>
+</form>
+

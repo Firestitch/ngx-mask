@@ -1,8 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Components
 import { FsMaskDirective } from './directives/mask.directive';
+import { FsMaskNumberDirective } from './directives/mask-number.directive';
+import { FsMaskRexExpDirective } from './directives/mask-reg-exp.directive';
 
 
 @NgModule({
@@ -11,9 +12,13 @@ import { FsMaskDirective } from './directives/mask.directive';
   ],
   exports: [
     FsMaskDirective,
+    FsMaskNumberDirective,
+    FsMaskRexExpDirective
   ],
   declarations: [
     FsMaskDirective,
+    FsMaskNumberDirective,
+    FsMaskRexExpDirective
   ],
 })
 export class FsMaskModule {

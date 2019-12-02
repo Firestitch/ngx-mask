@@ -13,6 +13,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { FsMaterialModule } from './material.module';
 import { FirstExampleComponent } from './components/first-example/first-example.component';
+import { NumberComponent } from './components/number/number.component';
+import { RegexComponent } from './components/regex/regex.component';
+import { PatternComponent } from './components/pattern/pattern.component';
 
 
 @NgModule({
@@ -31,9 +34,11 @@ import { FirstExampleComponent } from './components/first-example/first-example.
   entryComponents: [],
   declarations: [
     AppComponent,
-    FirstExampleComponent
-  ],
-  providers: [],
+    FirstExampleComponent,
+    NumberComponent,
+    RegexComponent,
+    PatternComponent
+  ]
 })
 export class PlaygroundModule {
 }
