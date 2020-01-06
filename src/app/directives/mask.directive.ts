@@ -74,7 +74,8 @@ export class FsMaskDirective implements OnInit {
 
     this._imask = IMask(this._elementRef.nativeElement, maskOptions);
     this._imask.on('accept', () => {
-      this._onChange(this._imask.unmaskedValue);
+      console.log(this._imask.typedValue);
+      this._onChange(this._imask.typedValue);
     });
   }
 
