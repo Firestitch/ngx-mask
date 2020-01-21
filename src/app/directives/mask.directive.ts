@@ -3,7 +3,8 @@ import {
   ElementRef,
   forwardRef,
   OnInit,
-  Input
+  Input,
+  HostListener
 } from '@angular/core';
 
 
@@ -34,6 +35,12 @@ export class FsMaskDirective implements OnInit {
   @Input() max;
   @Input() startsWith;
   @Input() lazy;
+
+  @HostListener('input') input() {
+    setTimeout(() => {
+      this._onChange(this._imask.unmaskedValue);
+    });
+  }
 
   private _imask;
 
@@ -73,10 +80,6 @@ export class FsMaskDirective implements OnInit {
     };
 
     this._imask = IMask(this._elementRef.nativeElement, maskOptions);
-    this._imask.on('accept', () => {
-      console.log(this._imask.typedValue);
-      this._onChange(this._imask.typedValue);
-    });
   }
 
   private writeValue(value: any) {
