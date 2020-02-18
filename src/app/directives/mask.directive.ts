@@ -4,11 +4,11 @@ import {
   forwardRef,
   OnInit,
   Input,
-  HostListener
+  HostListener, AfterContentInit
 } from '@angular/core';
 
 
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import IMask from 'imask';
 import { toString } from 'lodash-es';
@@ -22,7 +22,7 @@ import { toString } from 'lodash-es';
     multi: true
   } ]
 })
-export class FsMaskDirective implements OnInit {
+export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAccessor {
 
   @Input() format: 'currency';
   @Input() mask: RegExp | Function | String | Number | Date;
@@ -44,16 +44,8 @@ export class FsMaskDirective implements OnInit {
 
   private _imask;
 
-  _onTouched = () => {};
-  _onChange = (value: any) => {};
-
-  registerOnChange(fn: (value: any) => any): void {
-    this._onChange = fn
-  }
-
-  registerOnTouched(fn: () => any): void {
-    this._onTouched = fn
-  }
+  public _onTouched = () => {};
+  public _onChange = (value: any) => {};
 
   constructor(private _elementRef: ElementRef) {}
 
@@ -82,7 +74,41 @@ export class FsMaskDirective implements OnInit {
     this._imask = IMask(this._elementRef.nativeElement, maskOptions);
   }
 
-  private writeValue(value: any) {
+  public ngAfterContentInit(): void {
+    this._focusHack();
+  }
+
+  public writeValue(value: any) {
     this._imask.value = toString(value);
+  }
+
+  public registerOnChange(fn: (value: any) => any): void {
+    this._onChange = fn
+  }
+
+  public registerOnTouched(fn: () => any): void {
+    this._onTouched = fn
+  }
+
+  /**
+   * This issue related with A-T2185
+   *
+   * After modal dialog opened - material dialog do focus and cursor pointer
+   * is before the text. Its somehow related with imask and material.
+   * That hack should work for it
+   */
+  private _focusHack() {
+    const focusCallback = () => {
+      this._elementRef.nativeElement.setSelectionRange(
+        this._elementRef.nativeElement.value.length,
+        this._elementRef.nativeElement.value.length
+      );
+    };
+
+    setTimeout(() => {
+      this._elementRef.nativeElement.removeEventListener('focus', focusCallback);
+    }, 1000);
+
+    this._elementRef.nativeElement.addEventListener('focus', focusCallback)
   }
 }
