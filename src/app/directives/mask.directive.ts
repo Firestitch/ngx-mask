@@ -35,6 +35,7 @@ export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAc
   @Input() max;
   @Input() startsWith;
   @Input() lazy;
+  @Input() placeholderChar = '_';
 
   @HostListener('input') input() {
     setTimeout(() => {
@@ -68,6 +69,7 @@ export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAc
       min: this.min,
       lazy: this.lazy,
       max: this.max,
+      placeholderChar: this.placeholderChar,
       startsWith: this.startsWith
     };
 
