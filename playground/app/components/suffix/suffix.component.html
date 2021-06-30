@@ -1,0 +1,16 @@
+<form fsForm="save(form)">
+  <mat-form-field>
+    <input
+      matInput
+      [(ngModel)]="value"
+      fsFormRequired
+      fsMask
+      [lazy]="true"
+      name="value"
+      mask="num %"
+      placeholder="Value"
+      (ngModelChange)="changed($event)">
+    <mat-hint>Value: {{value}}</mat-hint>
+  </mat-form-field>
+</form>
+

@@ -16,6 +16,7 @@ import { FirstExampleComponent } from './components/first-example/first-example.
 import { NumberComponent } from './components/number/number.component';
 import { RegexComponent } from './components/regex/regex.component';
 import { PatternComponent } from './components/pattern/pattern.component';
+import { SuffixComponent } from './components/suffix/suffix.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { PatternComponent } from './components/pattern/pattern.component';
     FirstExampleComponent,
     NumberComponent,
     RegexComponent,
-    PatternComponent
+    PatternComponent,
+    SuffixComponent,
   ]
 })
 export class PlaygroundModule {
