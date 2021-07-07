@@ -22,7 +22,7 @@ import { FsMaskRexExpDirective } from './directives/mask-reg-exp.directive';
   ],
 })
 export class FsMaskModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<FsMaskModule> {
     return {
       ngModule: FsMaskModule
     };
