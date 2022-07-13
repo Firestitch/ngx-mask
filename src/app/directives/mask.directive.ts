@@ -4,11 +4,16 @@ import {
   forwardRef,
   OnInit,
   Input,
-  HostListener, AfterContentInit
+  HostListener,
+  AfterContentInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import IMask from 'imask';
 import { toString } from 'lodash-es';
@@ -22,24 +27,51 @@ import { toString } from 'lodash-es';
     multi: true
   } ]
 })
-export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAccessor {
+export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
-  @Input() format: 'currency';
-  @Input() mask: RegExp | Function | String | Number | Date;
-  @Input() padFractionalZeros;
-  @Input() thousandsSeparator = ',';
-  @Input() radix = '.';
-  @Input() scale;
-  @Input() signed = true;
-  @Input() min;
-  @Input() max;
-  @Input() startsWith;
-  @Input() lazy;
-  @Input() placeholderChar = '_';
+  @Input('fsMask')
+  public maskEnabled = true;
 
-  @HostListener('input') input() {
+  @Input()
+  public format: 'currency';
+
+  @Input()
+  public mask: RegExp | Function | String | Number | Date;
+
+  @Input()
+  public padFractionalZeros;
+
+  @Input()
+  public thousandsSeparator = ',';
+
+  @Input()
+  public radix = '.';
+
+  @Input()
+  public scale;
+
+  @Input()
+  public signed = true;
+
+  @Input()
+  public min;
+
+  @Input()
+  public max;
+
+  @Input()
+  public startsWith;
+
+  @Input()
+  public lazy;
+
+  @Input()
+  public placeholderChar = '_';
+
+  @HostListener('input')
+  public input() {
     setTimeout(() => {
-      this._onChange(this._imask.unmaskedValue);
+      this._onChange(this._controlValue);
     });
   }
 
@@ -48,7 +80,23 @@ export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAc
   public _onTouched = () => {};
   public _onChange = (value: any) => {};
 
-  constructor(private _elementRef: ElementRef) {}
+  constructor(
+    private _elementRef: ElementRef,
+  ) {}
+
+  private get _controlValue(): unknown {
+    return this.maskEnabled
+      ? this._imask.unmaskedValue
+      : this._elementRef.nativeElement.value;
+  }
+
+  public ngOnChanges(changes: SimpleChanges) {
+    if (changes.maskEnabled
+      && !changes.maskEnabled.firstChange
+      && changes.maskEnabled.previousValue !== changes.maskEnabled.currentValue) {
+      this._updateMaskState();
+    }
+  }
 
   public ngOnInit() {
 
@@ -57,6 +105,42 @@ export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAc
       this.scale = 2;
       this.signed = false;
       this.padFractionalZeros = true;
+    }
+
+    this._updateMaskState();
+  }
+
+  public ngAfterContentInit(): void {
+    this._focusHack();
+  }
+
+  public ngOnDestroy(): void {
+    this._destroyMask();
+  }
+
+  public writeValue(value: any) {
+    this._imask.value = toString(value);
+  }
+
+  public registerOnChange(fn: (value: any) => any): void {
+    this._onChange = fn
+  }
+
+  public registerOnTouched(fn: () => any): void {
+    this._onTouched = fn
+  }
+
+  private _updateMaskState(): void {
+    if (coerceBooleanProperty(this.maskEnabled)) {
+      this._initMask();
+    } else {
+      this._destroyMask();
+    }
+  }
+
+  private _initMask(): void {
+    if (!!this._imask) {
+      return;
     }
 
     const maskOptions: any = {
@@ -76,20 +160,11 @@ export class FsMaskDirective implements OnInit, AfterContentInit, ControlValueAc
     this._imask = IMask(this._elementRef.nativeElement, maskOptions);
   }
 
-  public ngAfterContentInit(): void {
-    this._focusHack();
-  }
-
-  public writeValue(value: any) {
-    this._imask.value = toString(value);
-  }
-
-  public registerOnChange(fn: (value: any) => any): void {
-    this._onChange = fn
-  }
-
-  public registerOnTouched(fn: () => any): void {
-    this._onTouched = fn
+  private _destroyMask(): void {
+    if (!!this._imask) {
+      this._imask.destroy();
+      this._imask = null;
+    }
   }
 
   /**
