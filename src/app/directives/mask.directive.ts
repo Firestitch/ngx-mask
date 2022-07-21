@@ -30,7 +30,7 @@ import { toString } from 'lodash-es';
 export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
   @Input('fsMask')
-  public maskEnabled: boolean | undefined = true;
+  public maskEnabled: boolean | string = true;
 
   @Input()
   public format: 'currency';
