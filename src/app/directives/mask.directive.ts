@@ -91,10 +91,15 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   public ngOnChanges(changes: SimpleChanges) {
-    if (changes.maskEnabled
-      && !changes.maskEnabled.firstChange
-      && changes.maskEnabled.previousValue !== changes.maskEnabled.currentValue) {
-      this._updateMaskState();
+    if (changes.maskEnabled) {
+      this.maskEnabled = coerceBooleanProperty(this.maskEnabled);
+
+      if (
+        !changes.maskEnabled.firstChange
+        && changes.maskEnabled.previousValue !== changes.maskEnabled.currentValue
+      ) {
+        this._updateMaskState();
+      }
     }
   }
 
