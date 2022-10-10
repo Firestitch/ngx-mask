@@ -68,6 +68,9 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   @Input()
   public placeholderChar = '_';
 
+  @Input()
+  public maskOptions = {};
+
   @HostListener('input')
   public input() {
     setTimeout(() => {
@@ -148,7 +151,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
       return;
     }
 
-    const maskOptions: any = {
+    const maskOptions: any = {      
       mask: this.mask,
       radix: this.radix,
       thousandsSeparator: this.thousandsSeparator,
@@ -159,7 +162,8 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
       lazy: this.lazy,
       max: this.max,
       placeholderChar: this.placeholderChar,
-      startsWith: this.startsWith
+      startsWith: this.startsWith,
+      ...this.maskOptions,
     };
 
     this._imask = IMask(this._elementRef.nativeElement, maskOptions);
