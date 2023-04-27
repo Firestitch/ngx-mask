@@ -36,7 +36,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public format: 'currency';
 
   @Input()
-  public mask: RegExp | Function | String | Number | Date | String[];
+  public mask: RegExp | Function | String | Number | Date | any[];
 
   @Input()
   public padFractionalZeros;
@@ -107,7 +107,6 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   public ngOnInit() {
-
     if (this.format === 'currency') {
       this.mask = Number;
       this.scale = 2;
