@@ -36,7 +36,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public format: 'currency';
 
   @Input()
-  public mask: RegExp | Function | String | Number | Date;
+  public mask: RegExp | Function | String | Number | Date | String[];
 
   @Input()
   public padFractionalZeros;
