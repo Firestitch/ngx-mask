@@ -5,9 +5,10 @@
       [(ngModel)]="value"
       fsFormRequired
       fsMask
-      [lazy]="true"
+      [lazy]="false"
       name="value"
-      mask="num %"
+      [mask]="mask"
+      [placeholderChar]="' '"
       placeholder="Value"
       (ngModelChange)="changed($event)">
     <mat-hint>Value: {{value}}</mat-hint>

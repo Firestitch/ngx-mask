@@ -6,8 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: [ 'suffix.component.css' ]
 })
 export class SuffixComponent {
-  public value = '';
 
+  public value = '';
+  public mask = '0\' [00]"';
+  
   changed(e) {
     console.log(e);
   }
