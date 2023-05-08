@@ -1,0 +1,17 @@
+<form fsForm="save(form)">
+  <mat-form-field>
+    <input
+      matInput
+      [(ngModel)]="date"
+      fsFormRequired
+      fsMask
+      [mask]="'MM/YY'"
+      [blocks]="blocks"
+      [lazy]="false"
+      name="date"
+      placeholder="Date"
+      (ngModelChange)="changed($event)">
+    <mat-hint>Value: {{date}}</mat-hint>
+  </mat-form-field>
+</form>
+

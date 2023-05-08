@@ -17,6 +17,7 @@ import { NumberComponent } from './components/number/number.component';
 import { RegexComponent } from './components/regex/regex.component';
 import { PatternComponent } from './components/pattern/pattern.component';
 import { SuffixComponent } from './components/suffix/suffix.component';
+import { BlockComponent } from './components';
 
 
 @NgModule({
@@ -32,13 +33,13 @@ import { SuffixComponent } from './components/suffix/suffix.component';
     FsExampleModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
   ],
-  entryComponents: [],
   declarations: [
     AppComponent,
     FirstExampleComponent,
     NumberComponent,
     RegexComponent,
     PatternComponent,
+    BlockComponent,
     SuffixComponent,
   ]
 })

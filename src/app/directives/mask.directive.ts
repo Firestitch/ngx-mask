@@ -69,6 +69,9 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public placeholderChar = '_';
 
   @Input()
+  public blocks: any;
+
+  @Input()
   public maskOptions = {};
 
   @HostListener('input')
@@ -126,7 +129,9 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   public writeValue(value: any) {
-    this._imask.value = toString(value);
+    if(this._imask) {
+      this._imask.value = toString(value);
+    }
   }
 
   public registerOnChange(fn: (value: any) => any): void {
@@ -159,6 +164,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
       signed: this.signed,
       min: this.min,
       lazy: this.lazy,
+      blocks: this.blocks,
       max: this.max,
       placeholderChar: this.placeholderChar,
       startsWith: this.startsWith,
