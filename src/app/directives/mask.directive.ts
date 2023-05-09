@@ -15,7 +15,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import IMask from 'imask';
+import IMask, { InputMask } from 'imask';
 import { toString } from 'lodash-es';
 
 
@@ -90,6 +90,10 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
     private _elementRef: ElementRef,
   ) {}
 
+  public get imask(): InputMask<any> {
+    return this._imask;
+  }
+  
   private get _controlValue(): unknown {
     return this.maskEnabled
       ? this._imask.unmaskedValue
