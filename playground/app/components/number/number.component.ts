@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'number',
-  templateUrl: 'number.component.html',
-  styleUrls: [ 'number.component.css' ]
+  templateUrl: './number.component.html',
+  styleUrls: ['./number.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumberComponent {
-  public number = '';
 
-  changed(e) {
+  public value = '';
+
+  public changed(e) {
     console.log(e);
   }
 }

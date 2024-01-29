@@ -2,16 +2,16 @@
   <mat-form-field>
     <input
       matInput
-      [(ngModel)]="number"
+      [(ngModel)]="value"
       fsFormRequired
       fsMaskNumber
-      scale="5"
+      [scale]="5"
       name="number"
       [signed]="true"
       [padFractionalZeros]="true"
       placeholder="Number"
       (ngModelChange)="changed($event)">
-    <mat-hint>Value: {{number}}</mat-hint>
+    <mat-hint>Value: {{value}}</mat-hint>
   </mat-form-field>
 </form>
 

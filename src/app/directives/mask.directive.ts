@@ -1,18 +1,17 @@
 import {
+  AfterContentInit,
   Directive,
   ElementRef,
-  forwardRef,
-  OnInit,
-  Input,
   HostListener,
-  AfterContentInit,
-  OnDestroy,
+  Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
   SimpleChanges,
+  forwardRef,
 } from '@angular/core';
-
-
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import IMask, { InputMask } from 'imask';
@@ -21,11 +20,11 @@ import { toString } from 'lodash-es';
 
 @Directive({
   selector: '[fsMask]',
-  providers: [ {
+  providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsMaskDirective),
-    multi: true
-  } ]
+    multi: true,
+  }],
 })
 export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
@@ -33,13 +32,13 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public maskEnabled: boolean | string = true;
 
   @Input()
-  public format: 'currency';
+  public format: 'currency' | 'number' = 'number';
 
   @Input()
-  public mask: RegExp | Function | String | Number | Date | any[];
+  public mask: RegExp | Function | string | number | Date | any[];
 
   @Input()
-  public padFractionalZeros;
+  public padFractionalZeros = false;
 
   @Input()
   public thousandsSeparator = ',';
@@ -48,10 +47,10 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public radix = '.';
 
   @Input()
-  public scale;
+  public scale: number;
 
   @Input()
-  public signed = true;
+  public signed: boolean;
 
   @Input()
   public min;
@@ -74,6 +73,15 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   @Input()
   public maskOptions = {};
 
+  public _onTouched: () => void;
+  public _onChange: (value: any) => void;
+
+  private _imask;
+
+  constructor(
+    private _elementRef: ElementRef,
+  ) {}
+
   @HostListener('input')
   public input() {
     setTimeout(() => {
@@ -81,19 +89,10 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
     });
   }
 
-  private _imask;
-
-  public _onTouched = () => {};
-  public _onChange = (value: any) => {};
-
-  constructor(
-    private _elementRef: ElementRef,
-  ) {}
-
   public get imask(): InputMask<any> {
     return this._imask;
   }
-  
+
   private get _controlValue(): unknown {
     return this.maskEnabled
       ? this._imask.unmaskedValue
@@ -115,10 +114,18 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
 
   public ngOnInit() {
     if (this.format === 'currency') {
-      this.mask = Number;
-      this.scale = 2;
-      this.signed = false;
+      this.mask = '$num';
       this.padFractionalZeros = true;
+      this.signed = this.signed ?? false;
+      this.scale = this.scale ?? 2;
+      this.blocks = {
+        num: {
+          mask: Number,
+          thousandsSeparator: ',',
+          radix: '.',
+          mapToRadix: [','],
+        },
+      };
     }
 
     this._updateMaskState();
@@ -139,11 +146,11 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   public registerOnChange(fn: (value: any) => any): void {
-    this._onChange = fn
+    this._onChange = fn;
   }
 
   public registerOnTouched(fn: () => any): void {
-    this._onTouched = fn
+    this._onTouched = fn;
   }
 
   private _updateMaskState(): void {
@@ -159,7 +166,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
       return;
     }
 
-    const maskOptions: any = {      
+    const maskOptions: any = {
       mask: this.mask,
       radix: this.radix,
       thousandsSeparator: this.thousandsSeparator,
@@ -196,7 +203,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
     const focusCallback = () => {
       this._elementRef.nativeElement.setSelectionRange(
         this._elementRef.nativeElement.value.length,
-        this._elementRef.nativeElement.value.length
+        this._elementRef.nativeElement.value.length,
       );
     };
 
@@ -204,6 +211,6 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
       this._elementRef.nativeElement.removeEventListener('focus', focusCallback);
     }, 1000);
 
-    this._elementRef.nativeElement.addEventListener('focus', focusCallback)
+    this._elementRef.nativeElement.addEventListener('focus', focusCallback);
   }
 }
