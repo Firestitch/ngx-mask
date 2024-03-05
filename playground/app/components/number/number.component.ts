@@ -9,8 +9,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class NumberComponent {
 
   public value = '';
+  public valueBlur = '';
 
   public changed(e) {
-    console.log(e);
+    console.log('Changed', e);
   }
 }

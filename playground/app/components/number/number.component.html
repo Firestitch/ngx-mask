@@ -1,17 +1,35 @@
 <form fsForm="save(form)">
-  <mat-form-field>
-    <input
-      matInput
-      [(ngModel)]="value"
-      fsFormRequired
-      fsMaskNumber
-      [scale]="5"
-      name="number"
-      [signed]="true"
-      [padFractionalZeros]="true"
-      placeholder="Number"
-      (ngModelChange)="changed($event)">
-    <mat-hint>Value: {{value}}</mat-hint>
-  </mat-form-field>
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Number</mat-label>
+      <input
+        matInput
+        [(ngModel)]="value"
+        fsFormRequired
+        fsMaskNumber
+        [scale]="5"
+        name="number"
+        [signed]="true"
+        [padFractionalZeros]="true"
+        (ngModelChange)="changed($event)">
+      <mat-hint>Value: {{value}}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Number (Change on Blur)</mat-label>
+      <input
+        matInput
+        [(ngModel)]="valueBlur"
+        fsFormRequired
+        fsMaskNumber
+        [scale]="5"
+        name="valueBlur"
+        [signed]="true"
+        [padFractionalZeros]="true"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        (ngModelChange)="changed($event)">
+      <mat-hint>Value: {{valueBlur}}</mat-hint>
+    </mat-form-field>
+  </div>
 </form>
 

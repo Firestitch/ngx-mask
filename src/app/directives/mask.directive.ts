@@ -80,7 +80,14 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
 
   constructor(
     private _elementRef: ElementRef,
-  ) {}
+  ) { }
+
+  @HostListener('blur')
+  public blur() {
+    setTimeout(() => {
+      this._onTouched();
+    });
+  }
 
   @HostListener('input')
   public input() {
@@ -140,7 +147,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   public writeValue(value: any) {
-    if(this._imask) {
+    if (this._imask) {
       this._imask.value = toString(value);
     }
   }
