@@ -65,6 +65,9 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public lazy;
 
   @Input()
+  public hidePrefix: boolean;
+
+  @Input()
   public placeholderChar = '_';
 
   @Input()
@@ -121,7 +124,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
 
   public ngOnInit() {
     if (this.format === 'currency') {
-      this.mask = '$num';
+      this.mask = this.hidePrefix ? 'num' : '$num';
       this.padFractionalZeros = true;
       this.signed = this.signed ?? false;
       this.scale = this.scale ?? 2;

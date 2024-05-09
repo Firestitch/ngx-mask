@@ -5,6 +5,7 @@
       [(ngModel)]="currency"
       fsFormRequired
       fsMaskCurrency
+      [hidePrefix]="false"
       name="currency"
       placeholder="Currency"
       (ngModelChange)="changed($event)">
