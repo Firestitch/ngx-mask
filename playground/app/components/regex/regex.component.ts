@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'regex',
-  templateUrl: 'regex.component.html',
-  styleUrls: [ 'regex.component.css' ]
+  templateUrl: './regex.component.html',
+  styleUrls: ['./regex.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegexComponent {
+
   public regex = '';
 
-  changed(e) {
+  public changed(e) {
     console.log(e);
   }
 }

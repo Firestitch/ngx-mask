@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
 import IMask from 'imask';
 
 
 @Component({
   selector: 'app-blocks',
   templateUrl: './blocks.component.html',
-  styleUrls: [ './blocks.component.css' ]
+  styleUrls: ['./blocks.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,  
 })
 export class BlockComponent implements OnInit {
   
   public date = '';
   public blocks = {};
 
-  changed(e) {
+  public changed(e) {
     console.log(e);
   }
 
@@ -22,11 +24,11 @@ export class BlockComponent implements OnInit {
         mask: IMask.MaskedRange,
         from: 1,
         to: 12,
-        placeholderChar: 'M'
+        placeholderChar: 'M',
       },
       YY: {
         mask: '00',
-        placeholderChar: 'Y'
+        placeholderChar: 'Y',
       },
     };
   }

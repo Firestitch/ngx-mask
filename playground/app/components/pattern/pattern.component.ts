@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'pattern',
-  templateUrl: 'pattern.component.html',
-  styleUrls: [ 'pattern.component.css' ]
+  templateUrl: './pattern.component.html',
+  styleUrls: ['./pattern.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PatternComponent {
+  
   public pattern = '';
 
-  changed(e) {
+  public changed(e) {
     console.log(e);
   }
 }
