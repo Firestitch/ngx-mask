@@ -35,7 +35,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   public format: 'currency' | 'number' = 'number';
 
   @Input()
-  public mask: RegExp | Function | string | number | Date | any[];
+  public mask: RegExp | (() => any) | string | number | Date | any[];
 
   @Input()
   public padFractionalZeros = false;
@@ -97,6 +97,14 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
     setTimeout(() => {
       this._onChange(this._controlValue);
     });
+  }
+
+  public get isComplete(): boolean {
+    return this._imask.masked.isComplete;
+  }
+
+  public get isFilled(): boolean {
+    return this._imask.masked.isFilled;
   }
 
   public get imask(): InputMask<any> {
@@ -175,7 +183,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   private _initMask(): void {
-    if (!!this._imask) {
+    if (this._imask) {
       return;
     }
 
@@ -199,7 +207,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
   }
 
   private _destroyMask(): void {
-    if (!!this._imask) {
+    if (this._imask) {
       this._imask.destroy();
       this._imask = null;
     }

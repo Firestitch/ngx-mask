@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+
+import { FsMaskDirective } from '../../../../src/app/directives/mask.directive';
 
 @Component({
   selector: 'pattern',
@@ -7,6 +9,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PatternComponent {
+
+  @ViewChild(FsMaskDirective)
+  public mask: FsMaskDirective;
   
   public pattern = '';
 
