@@ -2,7 +2,7 @@
   "name": "@firestitch/mask",
   "title": "Mask",
   "description": "@firestitch/mask",
-  "version": "13.0.4",
+  "version": "13.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-mask"

@@ -145,6 +145,8 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
           thousandsSeparator: ',',
           radix: '.',
           mapToRadix: [','],
+          scale: this.scale,
+          signed: this.signed,
         },
       };
     }
