@@ -5,10 +5,11 @@
       [(ngModel)]="currency"
       fsFormRequired
       fsMaskCurrency
-      [hidePrefix]="false"
       name="currency"
       placeholder="Currency"
       (ngModelChange)="changed($event)">
-    <mat-hint>Value: {{currency}}</mat-hint>
+    <mat-hint>
+      Value: {{ currency }}
+    </mat-hint>
   </mat-form-field>
 </form>
