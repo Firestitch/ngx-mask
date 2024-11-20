@@ -14,6 +14,6 @@ import { FsMaskDirective } from './mask.directive';
 })
 export class FsMaskCurrencyDirective extends FsMaskDirective {
 
-  public format: 'currency' = 'currency';
+  public format: 'currency' | 'number' = 'currency';
 
 }

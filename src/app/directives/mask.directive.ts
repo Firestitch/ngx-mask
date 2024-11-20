@@ -26,7 +26,8 @@ import { toString } from 'lodash-es';
     multi: true,
   }],
 })
-export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class FsMaskDirective 
+implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
 
   @Input('fsMask')
   public maskEnabled: boolean | string = true;
@@ -145,6 +146,7 @@ export class FsMaskDirective implements OnInit, OnChanges, AfterContentInit, OnD
           thousandsSeparator: ',',
           radix: '.',
           mapToRadix: [','],
+          padFractionalZeros: true,
           scale: this.scale,
           signed: this.signed,
         },
