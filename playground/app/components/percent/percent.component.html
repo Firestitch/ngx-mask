@@ -4,14 +4,13 @@
       matInput
       [(ngModel)]="value"
       fsFormRequired
-      fsMask
-      [lazy]="false"
+      fsMaskPercent
       name="value"
-      [mask]="mask"
-      [placeholderChar]="' '"
+      [scale]="3"
       placeholder="Percent"
       (ngModelChange)="changed($event)">
-    <mat-hint>Value: {{value}}</mat-hint>
+    <mat-hint>
+      Value: {{ value }}
+    </mat-hint>
   </mat-form-field>
 </form>
-

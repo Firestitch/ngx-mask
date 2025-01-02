@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class PercentComponent {
 
   public value = '';
-  public mask = '[000]%';
   
   public changed(e) {
     console.log(e);

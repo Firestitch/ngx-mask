@@ -1,33 +1,36 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { FsMaskDirective } from './directives/mask.directive';
-import { FsMaskNumberDirective } from './directives/mask-number.directive';
-import { FsMaskRexExpDirective } from './directives/mask-reg-exp.directive';
 import { FsMaskCurrencyDirective } from './directives/mask-currency.directive';
+import { FsMaskNumberDirective } from './directives/mask-number.directive';
+import { FsMaskPercentDirective } from './directives/mask-percent.directive';
+import { FsMaskRexExpDirective } from './directives/mask-reg-exp.directive';
+import { FsMaskDirective } from './directives/mask.directive';
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     FsMaskDirective,
     FsMaskNumberDirective,
     FsMaskRexExpDirective,
-    FsMaskCurrencyDirective
+    FsMaskCurrencyDirective,
+    FsMaskPercentDirective,
   ],
   declarations: [
     FsMaskDirective,
     FsMaskNumberDirective,
     FsMaskRexExpDirective,
     FsMaskCurrencyDirective,
+    FsMaskPercentDirective,
   ],
 })
 export class FsMaskModule {
-  static forRoot(): ModuleWithProviders<FsMaskModule> {
+  public static forRoot(): ModuleWithProviders<FsMaskModule> {
     return {
-      ngModule: FsMaskModule
+      ngModule: FsMaskModule,
     };
   }
 }
