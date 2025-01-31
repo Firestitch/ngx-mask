@@ -1,5 +1,6 @@
 export * from './blocks';
 export * from './first-example';
+export * from './height';
 export * from './number';
 export * from './pattern';
 export * from './percent';

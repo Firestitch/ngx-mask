@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'suffix',
-  templateUrl: './suffix.component.html',
-  styleUrls: ['./suffix.component.css'],
+  selector: 'app-height',
+  templateUrl: './height.component.html',
+  styleUrls: ['./height.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SuffixComponent {
+export class HeightComponent {
 
   public value = '';
-  public mask = '5555-******************************';
+  public mask = '0\' [00]"';
   
   public changed(e) {
     console.log(e);

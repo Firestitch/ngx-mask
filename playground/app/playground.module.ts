@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
@@ -14,7 +16,7 @@ import { FsMaskModule } from '../../src/app/mask.module';
 
 
 import { AppComponent } from './app.component';
-import { BlockComponent, PercentComponent } from './components';
+import { BlockComponent, HeightComponent, PercentComponent } from './components';
 import { FirstExampleComponent } from './components/first-example/first-example.component';
 import { NumberComponent } from './components/number/number.component';
 import { PatternComponent } from './components/pattern/pattern.component';
@@ -46,6 +48,15 @@ import { FsMaterialModule } from './material.module';
     BlockComponent,
     SuffixComponent,
     PercentComponent,
+    HeightComponent,
+  ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'outline',
+      },
+    },
   ],
 })
 export class PlaygroundModule {

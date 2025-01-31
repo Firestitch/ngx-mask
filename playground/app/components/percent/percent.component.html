@@ -1,5 +1,8 @@
 <form fsForm="save(form)">
   <mat-form-field>
+    <mat-label>
+      Value
+    </mat-label>
     <input
       matInput
       [(ngModel)]="value"
@@ -7,7 +10,6 @@
       fsMaskPercent
       name="value"
       [scale]="3"
-      placeholder="Percent"
       (ngModelChange)="changed($event)">
     <mat-hint>
       Value: {{ value }}

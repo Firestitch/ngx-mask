@@ -1,17 +1,20 @@
 <form fsForm="save(form)">
   <mat-form-field>
     <mat-label>
-      Currency
+      Value
     </mat-label>
     <input
       matInput
-      [(ngModel)]="currency"
+      [(ngModel)]="value"
       fsFormRequired
-      fsMaskCurrency
-      name="currency"
+      fsMask
+      [lazy]="false"
+      name="value"
+      [mask]="mask"
+      [placeholderChar]="' '"
       (ngModelChange)="changed($event)">
     <mat-hint>
-      Value: {{ currency }}
+      Value: {{ value }}
     </mat-hint>
   </mat-form-field>
 </form>
