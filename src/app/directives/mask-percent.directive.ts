@@ -15,6 +15,8 @@ import { FsMaskDirective } from './mask.directive';
 export class FsMaskPercentDirective extends FsMaskDirective implements OnInit {
 
   @Input() public scale = 0;
+  
+  @Input() public min = 0;
 
   public ngOnInit() {
     this.mask = [
@@ -28,7 +30,7 @@ export class FsMaskPercentDirective extends FsMaskDirective implements OnInit {
           num: {
             mask: Number,
             scale: this.scale,
-            min: 2,
+            min: this.min,
             max: 100,
             radix: '.',
             mapToRadix: [','],
