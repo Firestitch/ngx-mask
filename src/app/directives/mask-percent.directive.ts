@@ -19,25 +19,18 @@ export class FsMaskPercentDirective extends FsMaskDirective implements OnInit {
   @Input() public min = 0;
 
   public ngOnInit() {
-    this.mask = [
-      { 
-        mask: '',
+    this.mask = 'num%';
+    
+    this.blocks = {
+      num: {
+        mask: Number,
+        scale: this.scale,
+        min: this.min,
+        max: 100,
+        radix: '.',
+        mapToRadix: [','],
       },
-      {
-        mask: 'num%',
-        lazy: false,
-        blocks: {
-          num: {
-            mask: Number,
-            scale: this.scale,
-            min: this.min,
-            max: 100,
-            radix: '.',
-            mapToRadix: [','],
-          },
-        },
-      },
-    ];
+    };
 
     super.ngOnInit();
   }
