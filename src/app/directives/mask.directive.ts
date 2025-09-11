@@ -178,7 +178,7 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
     this._onTouched = fn;
   }
 
-  public updateOptions(opts: Partial<AnyMaskedOptions>): void {
+  public updateiMaskOptions(opts: Partial<AnyMaskedOptions>): void {
     this._imask.updateOptions(opts);
   }
 
