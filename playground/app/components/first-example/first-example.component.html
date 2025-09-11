@@ -15,20 +15,3 @@
     </mat-hint>
   </mat-form-field>
 </form>
-<form fsForm="save(form)">
-  <mat-form-field>
-    <mat-label>
-      Currency
-    </mat-label>
-    <input
-      matInput
-      [(ngModel)]="currency"
-      fsMask
-      [maskOptions]="maskOptions"
-      name="currency"
-      (ngModelChange)="changed($event)">
-    <mat-hint>
-      Value: {{ currency }}
-    </mat-hint>
-  </mat-form-field>
-</form>
