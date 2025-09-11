@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import IMask, { InputMask } from 'imask';
+import IMask, { AnyMaskedOptions, InputMask } from 'imask';
 import { toString } from 'lodash-es';
 
 
@@ -75,12 +75,12 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
   public blocks: any;
 
   @Input()
-  public maskOptions = {};
+  public maskOptions: Partial<AnyMaskedOptions> = {};
 
   public _onTouched: () => void;
   public _onChange: (value: any) => void;
 
-  private _imask;
+  private _imask: InputMask<any>;
 
   constructor(
     private _elementRef: ElementRef,
@@ -176,6 +176,10 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
 
   public registerOnTouched(fn: () => any): void {
     this._onTouched = fn;
+  }
+
+  public updateOptions(opts: Partial<AnyMaskedOptions>): void {
+    this._imask.updateOptions(opts);
   }
 
   private _updateMaskState(): void {
