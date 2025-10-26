@@ -1,15 +1,4 @@
-import {
-  AfterContentInit,
-  Directive,
-  ElementRef,
-  HostListener,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  forwardRef,
-} from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -29,6 +18,8 @@ import { toString } from 'lodash-es';
 })
 export class FsMaskDirective 
 implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
+  private _elementRef = inject(ElementRef);
+
 
   @Input('fsMask')
   public maskEnabled: boolean | string = true;
@@ -82,10 +73,6 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
   public _onChange: (value: any) => void;
 
   private _imask: InputMask<any>;
-
-  constructor(
-    private _elementRef: ElementRef,
-  ) { }
 
   @HostListener('blur')
   public blur() {
