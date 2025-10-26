@@ -19,12 +19,13 @@ import { toString } from 'lodash-es';
 
 
 @Directive({
-  selector: '[fsMask]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsMaskDirective),
-    multi: true,
-  }],
+    selector: '[fsMask]',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsMaskDirective),
+            multi: true,
+        }],
+    standalone: true,
 })
 export class FsMaskDirective 
 implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {

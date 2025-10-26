@@ -5,12 +5,13 @@ import { FsMaskDirective } from './mask.directive';
 
 
 @Directive({
-  selector: '[fsMaskPercent]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsMaskPercentDirective),
-    multi: true,
-  }],
+    selector: '[fsMaskPercent]',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsMaskPercentDirective),
+            multi: true,
+        }],
+    standalone: true,
 })
 export class FsMaskPercentDirective extends FsMaskDirective implements OnInit {
 

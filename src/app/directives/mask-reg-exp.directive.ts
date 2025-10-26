@@ -5,12 +5,13 @@ import { FsMaskDirective } from './mask.directive';
 
 
 @Directive({
-  selector: '[fsMaskRegExp]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsMaskRexExpDirective),
-    multi: true,
-  }],
+    selector: '[fsMaskRegExp]',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsMaskRexExpDirective),
+            multi: true,
+        }],
+    standalone: true,
 })
 export class FsMaskRexExpDirective extends FsMaskDirective {
 

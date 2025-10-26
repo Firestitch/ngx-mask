@@ -5,12 +5,13 @@ import { FsMaskDirective } from './mask.directive';
 
 
 @Directive({
-  selector: '[fsMaskCurrency]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsMaskCurrencyDirective),
-    multi: true,
-  }],
+    selector: '[fsMaskCurrency]',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsMaskCurrencyDirective),
+            multi: true,
+        }],
+    standalone: true,
 })
 export class FsMaskCurrencyDirective extends FsMaskDirective {
 

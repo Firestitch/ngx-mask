@@ -9,23 +9,21 @@ import { FsMaskDirective } from './directives/mask.directive';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
-  exports: [
-    FsMaskDirective,
-    FsMaskNumberDirective,
-    FsMaskRexExpDirective,
-    FsMaskCurrencyDirective,
-    FsMaskPercentDirective,
-  ],
-  declarations: [
-    FsMaskDirective,
-    FsMaskNumberDirective,
-    FsMaskRexExpDirective,
-    FsMaskCurrencyDirective,
-    FsMaskPercentDirective,
-  ],
+    imports: [
+        CommonModule,
+        FsMaskDirective,
+        FsMaskNumberDirective,
+        FsMaskRexExpDirective,
+        FsMaskCurrencyDirective,
+        FsMaskPercentDirective,
+    ],
+    exports: [
+        FsMaskDirective,
+        FsMaskNumberDirective,
+        FsMaskRexExpDirective,
+        FsMaskCurrencyDirective,
+        FsMaskPercentDirective,
+    ],
 })
 export class FsMaskModule {
   public static forRoot(): ModuleWithProviders<FsMaskModule> {
