@@ -1,18 +1,17 @@
 <form fsForm="save(form)">
   <mat-form-field>
+    <mat-label>
+      Currency
+    </mat-label>
     <input
       matInput
-      fsPhone
-      [(ngModel)]="phone"
+      [(ngModel)]="currency"
       fsFormRequired
-      fsFormPhone
-      name="phone"
-      placeholder="Phone"
+      fsMaskCurrency
+      name="currency"
       (ngModelChange)="changed($event)">
+    <mat-hint>
+      Value: {{ currency }}
+    </mat-hint>
   </mat-form-field>
 </form>
-
-<fieldset *ngIf="phone">
-  <legend>Phone Value</legend>
-  <pre>{{phone}}</pre>
-</fieldset>
