@@ -3,23 +3,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import IMask, { AnyMaskedOptions, InputMask } from 'imask';
+import IMask, { InputMask, MaskedOptions } from 'imask';
 import { toString } from 'lodash-es';
 
 
 @Directive({
-    selector: '[fsMask]',
-    providers: [{
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FsMaskDirective),
-            multi: true,
-        }],
-    standalone: true,
+  selector: '[fsMask]',
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => FsMaskDirective),
+    multi: true,
+  }],
+  standalone: true,
 })
 export class FsMaskDirective 
 implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
-  private _elementRef = inject(ElementRef);
-
 
   @Input('fsMask')
   public maskEnabled: boolean | string = true;
@@ -67,12 +65,14 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
   public blocks: any;
 
   @Input()
-  public maskOptions: Partial<AnyMaskedOptions> = {};
+  public maskOptions: Partial<MaskedOptions> = {};
 
   public _onTouched: () => void;
   public _onChange: (value: any) => void;
+  public value: any;
 
-  private _imask: InputMask<any>;
+  private _imask: InputMask<any>; 
+  private _elementRef = inject(ElementRef);
 
   @HostListener('blur')
   public blur() {
@@ -145,6 +145,10 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
   }
 
   public ngAfterContentInit(): void {
+    setTimeout(() => {
+      this._imask.unmaskedValue = this.value;
+    });
+    
     this._focusHack();
   }
 
@@ -153,6 +157,7 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
   }
 
   public writeValue(value: any) {
+    this.value = value;
     if (this._imask) {
       this._imask.value = toString(value);
     }
@@ -166,7 +171,7 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
     this._onTouched = fn;
   }
 
-  public updateMaskOptions(opts: Partial<AnyMaskedOptions>): void {
+  public updateMaskOptions(opts: Partial<MaskedOptions>): void {
     this._imask.updateOptions(opts);
   }
 
@@ -199,7 +204,7 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
       ...this.maskOptions,
     };
 
-    this._imask = IMask(this._elementRef.nativeElement, maskOptions);
+    this._imask = IMask(this._elementRef.nativeElement, maskOptions);    
   }
 
   private _destroyMask(): void {
