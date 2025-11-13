@@ -145,7 +145,7 @@ implements OnInit, OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor 
   }
 
   public ngAfterContentInit(): void {
-    if(this.value !==  undefined || this.value !== null) {
+    if(this.value !==  undefined && this.value !== null) {
       setTimeout(() => {
         this._imask.unmaskedValue = this.value;
       });
